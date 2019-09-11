@@ -112,13 +112,21 @@ def get_summer(sent_with_index, sorted_sent_weight, topKRate):
 if __name__ == '__main__':
     # test_text = '/Users/liang/PycharmProjects/VideoAutoCut/Data/train2.txt'
     # test_text = utils.PROJECTROOT + "/Data/train2.txt"
-    test_text = utils.PROJECTROOT + "/Data/training17.txt"
+    # test_text = utils.PROJECTROOT + "/Data/training17.txt"
+    test_text = "../Data/training17.txt"
     stopWords_file = utils.PROJECTROOT + '/Data/stopWordList.txt'
 
-    with open(test_text, 'r') as f:
-        text = f.read()
+    linkpath = 'https://mbd.baidu.com/newspage/data/landingsuper?context=%7B"nid"%3A"news_9458947891947278527"%7D&n_type=0&p_from=1'
+    linkpath2 = 'https://mbd.baidu.com/newspage/data/landingsuper?context=%7B"nid"%3A"news_9106912512394455832"%7D&n_type=0&p_from=1'
+    linkpath3 = 'https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_8970543984864835078%22%7D&n_type=0&p_from=1'
+    linknovel = 'http://mm.hengyan.com/article/1036192.aspx'
 
-    text = utils.PreProcess(text)
+    # with open(test_text, 'r') as f:
+    #    text = f.read()
+
+    text = utils.ReadArticle(linkpath=linkpath2)
+
+    text = utils.PreProcess(''.join(text))
 
     stopWords = []
     with open(stopWords_file, 'r') as f:
