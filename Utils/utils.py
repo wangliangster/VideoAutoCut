@@ -1,7 +1,8 @@
 import os
-import urllib.request
-from bs4 import BeautifulSoup
 import re
+import urllib.request
+
+from bs4 import BeautifulSoup
 
 PROJECTROOT = os.path.abspath(os.path.dirname(os.getcwd()))
 
@@ -19,6 +20,7 @@ def ReadArticle(filepath=None, linkpath=None):
         text = re.findall('[“《\u4E00-\u9FFF]+.{0,18}[\u4E00-\u9FFF！？，。；：!?》]+', text)
 
     return text
+
 
 def PreProcess(text):
     if text:
