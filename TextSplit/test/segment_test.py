@@ -1,4 +1,3 @@
-import codecs
 from TextSplit.textrank4zh import Segmentation
 
 seg = Segmentation.Segmentation()
