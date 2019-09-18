@@ -12,15 +12,15 @@
 # 2. Now it can record audioes with any length;
 # 3. Now it doesn't ask for confirmation of recording anymore.
 
-import re
+import pyaudio
 import wave
+import re
+
 ####################################################################
 ################### generte record file name #######################
 ###################### modified by Wenjia ##########################
 from os import listdir
 from os.path import isfile, join
-
-import pyaudio
 
 output_filepath = "/Users/liang/Documents/kkb/wav/"  # 输出件的path
 file_list = [f for f in listdir(output_filepath) if isfile(join(output_filepath, f))]

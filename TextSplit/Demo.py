@@ -1,12 +1,7 @@
-import os
 import jieba
 import numpy as np
-
-import collections
-
-from sklearn import feature_extraction
-from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
 
 from Utils import utils
 
@@ -113,7 +108,8 @@ if __name__ == '__main__':
     # test_text = '/Users/liang/PycharmProjects/VideoAutoCut/Data/train2.txt'
     # test_text = utils.PROJECTROOT + "/Data/train2.txt"
     # test_text = utils.PROJECTROOT + "/Data/training17.txt"
-    test_text = "../Data/training17.txt"
+    # test_text = "../Data/training17.txt"
+    test_text = "../Data/wav2text.txt"
     stopWords_file = utils.PROJECTROOT + '/Data/stopWordList.txt'
 
     linkpath = 'https://mbd.baidu.com/newspage/data/landingsuper?context=%7B"nid"%3A"news_9458947891947278527"%7D&n_type=0&p_from=1'
