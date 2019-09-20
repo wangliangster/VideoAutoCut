@@ -1,10 +1,9 @@
+import codecs
 import os
 import re
 import urllib.request
 
 from bs4 import BeautifulSoup
-
-import codecs
 
 PROJECTROOT = os.path.abspath(os.path.dirname(os.getcwd()))
 
@@ -37,9 +36,37 @@ def Cut2Parts(text, sep=None):
     res = []
     for sp in sep:
         res.append(text.split(sp)[0])
-        text = sp + text.split(sp)[1]
-        res.append(text)
+        text = sp + '\n' + text.split(sp)[1]
+    res.append(text)
     return res
+
+
+def AvergeCut(text=None, limit=37915):
+    if not limit:
+        return text
+    res = []
+    start, end = 0, 0
+    numparts = len(text) // limit
+    for i in range(numparts):
+        start = i * limit
+        end = start + limit
+        res.append(text[start:end])
+    if end != len(text):
+        res.append(text[end:])
+    return res
+
+
+#### list remove [] internal
+####input: li = [[[[[[1],2],3],4],5]
+####output:li =[1,2,3,4,5]
+def flat(L):
+    out = []
+    for e in L:
+        if isinstance(e, list):
+            out += flat(e)
+        else:
+            out.append(e)
+    return out
 
 
 if __name__ == '__main__':
