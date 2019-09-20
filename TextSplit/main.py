@@ -1,28 +1,8 @@
-import numpy as np
-import pandas as pd
-
-import urllib.request
-from bs4 import BeautifulSoup
-import re
-
 from Utils import utils
-
-import codecs
 
 
 def ReadArticle(filepath=None, encoding='utf-8', linkpath=None):
-    text = ''
-    if filepath:
-        with codecs.open(str(filepath), 'r', encoding, 'ignore') as f:
-            text = f.read()
-    elif linkpath:
-        page = urllib.request.urlopen(linkpath)
-        html = BeautifulSoup(page.read(), 'html.parser')
-        text = html.get_text()
-        # only get chinese and numbers/chars of any less than 18 between two chinese character.
-        text = re.findall('[“《\u4E00-\u9FFF]+.{0,18}[\u4E00-\u9FFF！？，。；：!?》]+', text)
-
-    return text
+    pass
 
 
 def PreProcess(text=None):
@@ -66,10 +46,10 @@ if __name__ == '__main__':
     linknovel = 'http://mm.hengyan.com/article/1036192.aspx'
     TextContent = ''
 
-    # TextContent = ReadArticle(filepath=textpath)
-    #TextContent = ReadArticle(linkpath=linkpath)
-    # TextContent = ReadArticle(filepath='../Data/wav2text.txt')
-    TextContent = ReadArticle(filepath='../Data/围城.txt', encoding='GBK')
+    # TextContent = utils.ReadArticle(filepath=textpath)
+    # TextContent = utils.ReadArticle(linkpath=linkpath)
+    # TextContent = utils.ReadArticle(filepath='../Data/wav2text.txt')
+    TextContent = utils.ReadArticle(filepath='../Data/围城.txt', encoding='GBK')
 
     PreProcess()
     # use utils.PreProcess() temp
@@ -77,7 +57,7 @@ if __name__ == '__main__':
 
     print(TextContent)
 
-    #print(type(TextContent))
+    # print(type(TextContent))
 
     Cut2Parts()
 
