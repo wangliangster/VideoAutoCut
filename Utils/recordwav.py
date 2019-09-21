@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # https://blog.csdn.net/zzZ_CMing/article/details/81739193
 # coding：utf-8
 # author：zzZ_CMing  CSDN address:https://blog.csdn.net/zzZ_CMing
@@ -12,24 +10,33 @@
 # 2. Now it can record audioes with any length;
 # 3. Now it doesn't ask for confirmation of recording anymore.
 
-import pyaudio
-import wave
-import re
-
 ####################################################################
 ################### generte record file name #######################
 ###################### modified by Wenjia ##########################
+
+# fix bug of outputfile path have chinese character file name, will report range error
+# change frequence rate to adaptive mode
+# liang wang 2019-sep-20
+import os
+import re
+import wave
 from os import listdir
 from os.path import isfile, join
 
-output_filepath = "/Users/liang/Documents/kkb/wav/"  # 输出件的path
+import pyaudio
+
+output_filepath = '../Data/wav/'  # wav output path
+
+if not os.path.exists(output_filepath):
+    os.mkdir(output_filepath)
+
 file_list = [f for f in listdir(output_filepath) if isfile(join(output_filepath, f))]
 nums = [re.findall(r'\d+', f) for f in file_list if f.endswith('.wav')]
 # https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
 if not nums:
     new_num = 0
 else:
-    new_num = max([int(f[0]) for f in nums]) + 1
+    new_num = int(max(nums)[0]) + 1
 output_filename = "output_" + str(new_num) + ".wav"  # 麦克风采集的语音输入
 out_path = output_filepath + output_filename
 

@@ -1,3 +1,5 @@
+import re
+
 import jieba
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
@@ -120,9 +122,24 @@ if __name__ == '__main__':
     # with open(test_text, 'r') as f:
     #    text = f.read()
 
-    text = utils.ReadArticle(linkpath=linkpath2)
+    # text = utils.ReadArticle(linkpath=linkpath2)
+    text = utils.ReadArticle(filepath='../Data/围城.txt', encoding='GBK')
 
     text = utils.PreProcess(''.join(text))
+
+    sep = re.findall('第.章', text)
+    textlist = utils.Cut2Parts(text, sep)
+    # print(len(textlist))
+
+    for part in textlist:
+        index = textlist.index(part)
+        textlist[index] = utils.AvergeCut(part, 5000)
+
+    ### flatten list
+    textlist = utils.flat(textlist)
+    # print(len(textlist))
+
+    text = textlist[8]
 
     stopWords = []
     with open(stopWords_file, 'r') as f:
