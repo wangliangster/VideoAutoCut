@@ -31,12 +31,12 @@ if not os.path.exists(output_filepath):
     os.mkdir(output_filepath)
 
 file_list = [f for f in listdir(output_filepath) if isfile(join(output_filepath, f))]
-nums = [re.findall(r'\d+', f) for f in file_list if f.endswith('.wav')]
+nums = [int(re.findall(r'\d+', f)[0]) for f in file_list if f.endswith('.wav')]
 # https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
 if not nums:
     new_num = 0
 else:
-    new_num = int(max(nums)[0]) + 1
+    new_num = max(nums) + 1
 output_filename = "output_" + str(new_num) + ".wav"  # 麦克风采集的语音输入
 out_path = output_filepath + output_filename
 
@@ -80,3 +80,5 @@ def get_audio(filepath):
 
 # 联合上一篇博客代码使用，就注释掉下面，单独使用就不注释
 get_audio(out_path)
+
+os.system('/Users/liang/Documents/kkb/kaldi-master/egs/aidatatang_asr/wl.sh')
